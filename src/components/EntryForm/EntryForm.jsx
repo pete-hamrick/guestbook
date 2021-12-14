@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
 function EntryForm() {
-  const [name, setName] = useState();
-  const [entry, setEntry] = useState();
+  const [name, setName] = useState('');
+  const [entry, setEntry] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <form>
@@ -11,11 +15,18 @@ function EntryForm() {
       <input
         id="guestName"
         type="text"
-        placeholder="Guest Name..." /* need value and onChange */
+        placeholder="Guest Name..."
+        value={name}
+        onChange={({ target }) => setName(target.value)}
       />
 
       <label htmlFor="guestEntry">Guest Entry</label>
-      <textarea id="guestEntry" placeholder="Your Entry..." />
+      <textarea
+        id="guestEntry"
+        placeholder="Your Entry..."
+        value={entry}
+        onChange={({ target }) => setEntry(target.value)}
+      />
 
       <button type="submit">Sign</button>
     </form>
