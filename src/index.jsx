@@ -1,4 +1,13 @@
+import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
+import { EntryProvider } from './context/EntryContext';
 
-render(<App />, document.getElementById('root'));
+render(
+  <React.StrictMode>
+    <EntryProvider>
+      <App />
+    </EntryProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
