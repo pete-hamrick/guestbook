@@ -32,9 +32,13 @@ function EntryForm() {
     </div>
   );
 
+  const displayMessage = user
+    ? `Thanks for Signing, ${user}`
+    : 'Please Sign the Guestbook';
+
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Please Sign the Guest Book</h3>
+      <h2>{displayMessage}</h2>
       {user ? null : guestNameEntry}
       <label htmlFor="guestEntry">Guest Entry</label>
       <textarea
@@ -45,6 +49,17 @@ function EntryForm() {
       />
 
       <button type="submit">Sign</button>
+      {user && (
+        <button
+          type="button"
+          onClick={() => {
+            setUser('');
+            setName('');
+          }}
+        >
+          Not {user}?
+        </button>
+      )}
     </form>
   );
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Entry() {
+function Entry({ entry: { name, message } }) {
   return (
     <div>
-      <h2>Name Here</h2>
-      <p>Message here</p>
+      <h2>{name}</h2>
+      <p>{message}</p>
     </div>
   );
 }
