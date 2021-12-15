@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
 };
 
 const useUser = () => {
-  const context = useContext(EntryContext);
+  const context = useContext(UserContext);
 
   if (context === undefined) {
     throw new Error('useUser must be used within an UserContext Provider');

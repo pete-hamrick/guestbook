@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useEntries } from '../../context/EntryContext';
+import { useUser } from '../../context/UserContext';
 
 function EntryForm() {
   const [name, setName] = useState('');
   const [entry, setEntry] = useState('');
   const { entries, setEntries } = useEntries();
+  const { user, setUser } = useUser();
 
   function updateNameAndEntries() {
     if (!entry) return;
     setEntries([...entries, { name, message: entry }]);
+    setUser(name);
   }
 
   const handleSubmit = (e) => {
@@ -32,7 +35,7 @@ function EntryForm() {
   return (
     <form onSubmit={handleSubmit}>
       <h3>Please Sign the Guest Book</h3>
-      {name ? null : guestNameEntry}
+      {user ? null : guestNameEntry}
       <label htmlFor="guestEntry">Guest Entry</label>
       <textarea
         id="guestEntry"
