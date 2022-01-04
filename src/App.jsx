@@ -3,6 +3,7 @@ import Layout from './views/Layout/Layout';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ProvideAuth } from './context/ProvideAuth';
 import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
+import Login from './views/Auth/Login';
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
         <Router>
           <Switch>
             <Route path="/login">
-              <Authentication />
+              <Login />
             </Route>
             <PrivateRoutes exact path="/">
               <Home />

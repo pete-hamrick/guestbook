@@ -33,7 +33,7 @@ export default function Authentication() {
         </button>
       </form>
       <p className="text-center text-red-500 font-bold">
-        Error message goes here
+        {error && <h4>{error}</h4>}
       </p>
     </fieldset>
   );
