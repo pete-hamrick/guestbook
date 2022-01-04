@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useForm } from '../../hooks/useForm';
+import { useUser } from '../../context/UserContext';
 
 export default function Login() {
   const history = useHistory();
   const location = useLocation();
   const auth = useAuth();
+  const { setUser } = useUser();
   const { formState, handleFormChange } = useForm({
     username: '',
     password: '',
@@ -19,10 +21,14 @@ export default function Login() {
     event.preventDefault();
     const loginSuccessful = auth.login(formState.username, formState.password);
 
-    loginSuccessful
-      ? history.replace(from.pathname)
-      : setError('Wrong username/password combination');
+    if (loginSuccessful) {
+      setUser(formState.username);
+      history.replace(from.pathname);
+    } else {
+      setError('Wrong username/password combination');
+    }
   };
+
   return (
     <fieldset className="w-1/4 border p-4">
       <legend>Sign In</legend>

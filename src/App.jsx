@@ -8,8 +8,8 @@ import Login from './views/Auth/Login';
 export default function App() {
   return (
     <ProvideAuth>
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Switch>
             <Route path="/login">
               <Login />
@@ -18,8 +18,8 @@ export default function App() {
               <Home />
             </PrivateRoutes>
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </ProvideAuth>
   );
 }
