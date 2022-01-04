@@ -1,18 +1,41 @@
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useForm } from '../../hooks/useForm';
 
 export default function Login() {
+  const history = useHistory();
+  const location = useLocation();
+  const auth = useAuth();
+  const { formState, handleFormChange } = useForm({
+    username: '',
+    password: '',
+  });
   const [error, setError] = useState(null);
 
+  const { from } = location.state || { from: { pathname: '/' } };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const loginSuccessful = auth.login(formState.username, formState.password);
+
+    loginSuccessful
+      ? history.replace(from.pathname)
+      : setError('Wrong username/password combination');
+  };
   return (
     <fieldset className="w-1/4 border p-4">
       <legend>Sign In</legend>
-      <form className="grid grid-cols-[1fr_2fr] grid-rows-3">
+      <form
+        onSubmit={handleLogin}
+        className="grid grid-cols-[1fr_2fr] grid-rows-3"
+      >
         <label htmlFor="username" className="self-center text-right">
           Username
         </label>
         <input
+          value={formState.username}
+          onChange={handleFormChange}
           id="username"
           type="text"
           name="username"
@@ -23,6 +46,8 @@ export default function Login() {
           Password
         </label>
         <input
+          value={formState.password}
+          onChange={handleFormChange}
           id="password"
           type="password"
           name="password"
@@ -32,13 +57,12 @@ export default function Login() {
         <button
           type="submit"
           className="h-12 self-center bg-black text-white p-1 font-bold col-span-2"
+          aria-label="Sign In"
         >
           Sign In
         </button>
       </form>
-      <p className="text-center text-red-500 font-bold">
-        {error && <h4>{error}</h4>}
-      </p>
+      {error && <h4>{error}</h4>}
     </fieldset>
   );
 }

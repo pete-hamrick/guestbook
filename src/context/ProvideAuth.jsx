@@ -7,7 +7,8 @@ export function ProvideAuth({ children }) {
 
   const login = (username, password) => {
     const loginSuccessful =
-      email === process.env.AUTH_USERNAME && password === process.env.PASSWORD;
+      username === process.env.AUTH_USERNAME &&
+      password === process.env.AUTH_PASSWORD;
     if (loginSuccessful) setUser({ username });
     return loginSuccessful;
   };
