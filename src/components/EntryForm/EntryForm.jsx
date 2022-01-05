@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useEntries } from '../../context/EntryContext';
 import { useUser } from '../../context/UserContext';

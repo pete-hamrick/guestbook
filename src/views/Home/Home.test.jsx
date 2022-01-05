@@ -13,10 +13,7 @@ it('should render the home component if there is not a current user', () => {
     </EntryProvider>
   );
 
-  const guestNameEntry = screen.getByLabelText('Guest Name');
-
   const displayMessage = screen.getByText('Please Sign the Guestbook');
 
-  expect(guestNameEntry).toBeInTheDocument();
   expect(displayMessage).toBeInTheDocument();
 });
